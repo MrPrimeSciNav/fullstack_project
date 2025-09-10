@@ -1,0 +1,191 @@
+/* Base styles */
+body {
+    background-color: #121212;
+    /* Deep black */
+    color: #e0e0e0;
+    /* Light gray for readability */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container and layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #00bcd4;
+    /* Light blue accent */
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #b0bec5;
+    /* Lighter gray for subtitles */
+    font-size: 1.1em;
+}
+
+/* FAQ section */
+.faq-section {
+    background-color: #1e1e1e;
+    /* Slightly lighter black for contrast */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background-color: #2d2d2d;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.faq-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.faq-item h3 {
+    color: #00bcd4;
+    margin-top: 0;
+}
+
+.faq-item p {
+    color: #e0e0e0;
+    margin-bottom: 0;
+}
+
+/* Questions section */
+.questions {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.questions h2 {
+    color: #00bcd4;
+}
+
+.questions a {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.questions a:hover {
+    text-decoration: underline;
+}
+
+/* 3D Blue Buttons with Light Shine */
+button {
+    background: linear-gradient(135deg, #00b0ff, #0083e8);
+    /* Blue gradient */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow:
+        0 4px 0 #008ae6,
+        /* Bottom shadow for 3D effect */
+        0 6px 10px rgba(0, 0, 0, 0.3);
+    /* Outer shadow */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+button:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to bottom right,
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0));
+    transform: rotate(30deg);
+    pointer-events: none;
+    transition: transform 0.4s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 0 #0077cc,
+        0 8px 12px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow:
+        0 2px 0 #0077cc,
+        0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:before {
+    transform: rotate(30deg) translate(10%, 10%);
+}
+
+/* Tab buttons (for index.html) */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tab-button {
+    background: linear-gradient(135deg, #00b0ff, #0083e8);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow:
+        0 4px 0 #008ae6,
+        0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.tab-button.active {
+    background: linear-gradient(135deg, #0083e8, #00b0ff);
+    box-shadow:
+        0 2px 0 #0077cc,
+        0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tab-button:hover:not(.active) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 0 #0077cc,
+        0 8px 12px rgba(0, 0, 0, 0.4);
+}

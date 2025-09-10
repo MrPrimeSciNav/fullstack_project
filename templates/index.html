@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Board Manager</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Embedded Board Manager</h1>
+            <p>Upload, download, and sync files with your boards</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'connection-tab')">Connection</button>
+            <button class="tab-button" onclick="openTab(event, 'upload-tab')">Upload</button>
+            <button class="tab-button" onclick="openTab(event, 'download-tab')">Download</button>
+            <button class="tab-button" onclick="openTab(event, 'sync-tab')">Sync</button>
+            <a href="faq.html" class="tab-button" target="_blank">F.A.Q.</a>
+        </div>
+
+        <!-- Connection Tab -->
+        <div id="connection-tab" class="tab-content active">
+            <div class="card">
+                <h2>Board Connection</h2>
+
+                <div class="connection-type">
+                    <label>
+                        <input type="radio" name="connection-type" value="wifi" checked>
+                        WiFi/FTP Connection
+                    </label>
+                    <label>
+                        <input type="radio" name="connection-type" value="serial">
+                        Serial Connection
+                    </label>
+                </div>
+
+                <!-- WiFi Connection Form -->
+                <div id="wifi-form" class="connection-form">
+                    <div class="form-group">
+                        <label for="wifi-address">IP Address:</label>
+                        <input type="text" id="wifi-address" placeholder="192.168.0.101">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifi-username">Username:</label>
+                        <input type="text" id="wifi-username" value="micro">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifi-password">Password:</label>
+                        <input type="password" id="wifi-password" value="python">
+                    </div>
+                </div>
+
+                <!-- Serial Connection Form -->
+                <div id="serial-form" class="connection-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="serial-port">Serial Port:</label>
+                        <select id="serial-port">
+                            <option value="">Select a port...</option>
+                        </select>
+                        <button type="button" onclick="refreshSerialPorts()">Refresh</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="serial-baudrate">Baud Rate:</label>
+                        <select id="serial-baudrate">
+                            <option value="115200">115200</option>
+                            <option value="9600">9600</option>
+                            <option value="57600">57600</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="testConnection()" class="btn btn-primary">Test Connection</button>
+                <div id="connection-status" class="status-message"></div>
+            </div>
+        </div>
+
+        <!-- Upload Tab -->
+        <div id="upload-tab" class="tab-content">
+            <div class="card">
+                <h2>Upload Files</h2>
+                <div class="file-upload">
+                    <input type="file" id="upload-files" multiple accept=".py,.txt,.json,.conf">
+                    <label for="upload-files" class="file-label">
+                        Choose Files or Drag & Drop
+                    </label>
+                </div>
+                <div id="upload-file-list" class="file-list"></div>
+                <button onclick="uploadFiles()" class="btn btn-success">Upload Files</button>
+                <div id="upload-status" class="status-message"></div>
+            </div>
+        </div>
+
+        <!-- Download Tab -->
+        <div id="download-tab" class="tab-content">
+            <div class="card">
+                <h2>Download Files</h2>
+                <div class="file-download">
+                    <input type="file" id="download-files" multiple accept=".py,.txt,.json,.conf">
+                    <label for="download-files" class="file-label">
+                        Choose Files
+                    </label>
+                </div>
+                <div id="download-file-list" class="file-list"></div>
+                <button onclick="downloadFiles()" class="btn btn-success">Download Files</button>
+                <div id="download-status" class="status-message"></div>
+            </div>
+        </div>
+
+
+
+        <!-- Sync Tab -->
+        <div id="sync-tab" class="tab-content">
+            <div class="card">
+                <h2>Sync Files</h2>
+                <div class="file-sync">
+                    <input type="file" id="sync-files" multiple accept=".py,.txt,.json,.conf">
+                    <label for="sync-files" class="file-label">
+                        Choose Files or Drag & Drop
+                    </label>
+                </div>
+                <div id="sync-file-list" class="file-list"></div>
+                <button onclick="syncFiles()" class="btn btn-success">Sync Files</button>
+                <div id="sync-status" class="status-message"></div>
+            </div>
+        </div>
+
+        <!-- FAQ Tab -->
+        <div id="faq-tab" class="tab-content">
+            <div class="card">
+                <h2>Frequently Asked Questions (F.A.Q.)</h2>
+                <div class="faq-item">
+                    <a href="faq.html" target="_blank">
+                        How to set up FTP on MicroPython boards?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
