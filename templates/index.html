@@ -20,7 +20,7 @@
             <button class="tab-button" onclick="openTab(event, 'upload-tab')">Upload</button>
             <button class="tab-button" onclick="openTab(event, 'download-tab')">Download</button>
             <button class="tab-button" onclick="openTab(event, 'sync-tab')">Sync</button>
-            <a href="faq.html" class="tab-button" target="_blank">F.A.Q.</a>
+            <a href="{{ url_for('faq') }}" class="tab-button" target="_blank">F.A.Q.</a>
         </div>
 
         <!-- Connection Tab -->
@@ -141,4 +141,5 @@
             </div>
         </div>
     </div>
+     <script src="static/main.js"></script>
 </body>
