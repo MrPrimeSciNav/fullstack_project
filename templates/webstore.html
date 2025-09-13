@@ -4,13 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeSciNav Webstore</title>
+    <title>Embedded Board Manager</title>
     <link rel="stylesheet" href="static/style.css">
+    <!--Navigation-button to navigate the url:s-->
+        <link rel="icon" type="image/png" href="static/favicon.png">
+        <nav class="main-nav">
+            <ul id="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('webstore') }}">Webstore</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('faq') }}">F.A.Q.</a></li>
+            </ul>
+        </nav>
 </head>
 
 <body>
+    <!--Presentation video embedded from Youtube-->
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/watch?v=QBYr0k8dOtw" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
     <!--Portfolio of products of different licences with different price and contain-->
-    <!--use of open API to Stripe-->
+    <!--To be using an open API to Stripe-->
     <div class="container">
         <header>
             <h1>PrimeSciNav Webstore</h1>
@@ -18,25 +35,25 @@
         </header>
 
         <div class="product-list">
-            <!-- Example Product Card -->
+            <!-- Licence Product Card -->
             <div class="product-card">
-                <h2>Product Name 1</h2>
-                <p>Short description of Product 1.</p>
-                <p>Price: $49.99</p>
+                <h2>Mad Scientist</h2>
+                <p>The ultimate package of nasty science resources for the true mad scientist.</p>
+                <p>Price per month: $499.99</p>
                 <button class="buy-button">Buy Now</button>
             </div>
 
             <div class="product-card">
-                <h2>Product Name 2</h2>
-                <p>Short description of Product 2.</p>
-                <p>Price: $99.99</p>
+                <h2>Fearless Engineer</h2>
+                <p>The undisputable tools for the true innovator.</p>
+                <p>Price per month: $299.99</p>
                 <button class="buy-button">Buy Now</button>
             </div>
 
             <div class="product-card">
-                <h2>Product Name 3</h2>
-                <p>Short description of Product 3.</p>
-                <p>Price: $149.99</p>
+                <h2>Eternal Athlete</h2>
+                <p>The scientific collection of tech-resourses to get the upperhand.</p>
+                <p>Price per month: $149.99</p>
                 <button class="buy-button">Buy Now</button>
             </div>
         </div>
@@ -44,5 +61,5 @@
 
 
 
-    <script src="static/main.js"></script>
+    <script src="static/script.js"></script>
 </body>

@@ -283,6 +283,14 @@ def download_via_serial(filenames, connection_data):
     except Exception as e:
         return {'success': False, 'message': f'Serial download failed: {str(e)}'}
 
+@app.route('/webstore')
+def webstore():
+    return render_template('webstore.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/faq')
 def faq():
     return render_template('faq.html')

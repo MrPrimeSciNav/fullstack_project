@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Board Manager</title>
+    <link rel="stylesheet" href="static/style.css">
+    <!--Navigation-button to navigate the url:s-->
+        <link rel="icon" type="image/png" href="static/favicon.png">
+        <nav class="main-nav">
+            <ul id="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('webstore') }}">Webstore</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('faq') }}">F.A.Q.</a></li>
+            </ul>
+        </nav>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>About PrimeSciNav</h1>
+            <p>Learn more about our mission and team</p>
+        </header>
+
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>At PrimeSciNav, our mission is to empower scientists, engineers, and innovators with cutting-edge resources and tools that drive discovery and innovation. We are committed to providing high-quality products and services that meet the evolving needs of our community.</p>
+        </div>
+
+        <div class="team-section">
+            <h2>Meet the Team</h2>
+            <div class="team-member">
+                <h3>Dr. Jane Smith</h3>
+                <p>Founder & CEO</p>
+                <p>With over 20 years of experience in scientific research and technology development, Dr. Smith leads PrimeSciNav with a vision for innovation and excellence.</p>
+            </div>
+            <div class="team-member">
+                <h3>John Doe</h3>
+                <p>Chief Technology Officer</p>
+                <p>John oversees the development of our products and ensures that we stay at the forefront of technological advancements in the scientific community.</p>
+            </div>
+            <div class="team-member">
+                <h3>Emily Johnson</h3>
+                <p>Head of Customer Success</p>
+                <p>Emily is dedicated to ensuring that our customers have the best experience possible with our products and services.</p>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or would like to learn more about PrimeSciNav, please reach out to us at <a href="mailto: bigboss@primescinav.com" target="_blank">
+        </div>
+
+        <!--Table with descriptions of the benefits and strengths of using PrimeSciNav-->
+        <div class="benefits-section">
+            <h2>Why Choose PrimeSciNav?</h2>
+            <ul>
+                <li><strong>Innovative Products:</strong> We offer a range of cutting-edge tools and resources designed to meet the needs of modern scientists and engineers.</li>
+                <li><strong>Expert Team:</strong> Our team is composed of industry experts with extensive experience in science and technology.</li>
+                <li><strong>Customer Focused:</strong> We prioritize our customers' needs and are committed to providing exceptional support and service.</li>
+                <li><strong>Community Engagement:</strong> We actively engage with the scientific community to stay informed about emerging trends and challenges.</li>
+            </ul>
+        </div>
+
+        <!--Google Maps embedded to display our location at Silicon Valley-->
+        <div class="location-section">
+            <h2>Our Location</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019123456789!2d-122.084249684681!3d37.42206597982571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb5e5c5e5e5e5%3A0x5e5e5e5e5e5e5e5e!2sGoogleplex!5e0!3m2!1sen!2sus!4v1616161616161"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>

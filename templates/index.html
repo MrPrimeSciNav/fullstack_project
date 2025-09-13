@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embedded Board Manager</title>
     <link rel="stylesheet" href="static/style.css">
+    <!--Navigation-button to navigate the url:s-->
+        <link rel="icon" type="image/png" href="static/favicon.png">
+        <nav class="main-nav">
+            <ul id="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('webstore') }}">Webstore</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('faq') }}">F.A.Q.</a></li>
+            </ul>
+        </nav>
 </head>
 
 <body>
@@ -16,10 +26,7 @@
         </header>
 
         <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'connection-tab')">Connection</button>
-            <button class="tab-button" onclick="openTab(event, 'upload-tab')">Upload</button>
-            <button class="tab-button" onclick="openTab(event, 'download-tab')">Download</button>
-            <button class="tab-button" onclick="openTab(event, 'sync-tab')">Sync</button>
+            <a href="{{ url_for('webstore') }}" class="tab-button" target="_blank">Webstore</a>
             <a href="{{ url_for('faq') }}" class="tab-button" target="_blank">F.A.Q.</a>
         </div>
 
@@ -141,5 +148,5 @@
             </div>
         </div>
     </div>
-     <script src="static/main.js"></script>
+     <script src="static/script.js"></script>
 </body>
