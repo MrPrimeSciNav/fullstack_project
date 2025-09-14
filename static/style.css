@@ -202,3 +202,53 @@ button:before {
     text-decoration: none;
     padding: 0.5rem 1rem;
 }
+
+.repl-container {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.repl-output {
+    background-color: #1e1e1e;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    margin-bottom: 10px;
+}
+
+.repl-input-container {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.repl-prompt {
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    margin-right: 5px;
+}
+
+.repl-input {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    padding: 5px;
+}
+
+.repl-input:focus {
+    outline: none;
+}
+
+.repl-controls {
+    display: flex;
+    gap: 10px;
+}

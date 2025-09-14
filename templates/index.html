@@ -7,7 +7,7 @@
     <title>Embedded Board Manager</title>
     <link rel="stylesheet" href="static/style.css">
     <!--Navigation-button to navigate the url:s-->
-        <link rel="icon" type="image/png" href="static/favicon.png">
+        <link rel="icon" type="image/png" href="static/favicon-16x16.png">
         <nav class="main-nav">
             <ul id="nav-menu">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -26,8 +26,10 @@
         </header>
 
         <div class="tabs">
-            <a href="{{ url_for('webstore') }}" class="tab-button" target="_blank">Webstore</a>
-            <a href="{{ url_for('faq') }}" class="tab-button" target="_blank">F.A.Q.</a>
+            <a href="{{ url_for('index') }}" class="tab-button" target="_self">Board Manager</a>
+            <a href="{{ url_for('webstore') }}" class="tab-button" target="_self">Webstore</a>
+            <a href="{{ url_for('about') }}" class="tab-button" target="_self">About</a>
+            <a href="{{ url_for('faq') }}" class="tab-button" target="_self">F.A.Q.</a>
         </div>
 
         <!-- Connection Tab -->
@@ -118,8 +120,6 @@
             </div>
         </div>
 
-
-
         <!-- Sync Tab -->
         <div id="sync-tab" class="tab-content">
             <div class="card">
@@ -133,6 +133,34 @@
                 <div id="sync-file-list" class="file-list"></div>
                 <button onclick="syncFiles()" class="btn btn-success">Sync Files</button>
                 <div id="sync-status" class="status-message"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Upload Files</h2>
+            <div class="file-upload">
+                <input type="file" id="upload-files" multiple accept=".py,.txt,.json,.conf">
+                <label for="upload-files" class="file-label">
+                    Choose Files or Drag & Drop
+                </label>
+            </div>
+            <div id="upload-file-list" class="file-list"></div>
+            <button onclick="uploadFiles()" class="btn btn-success">Upload Files</button>
+            <div id="upload-status" class="status-message"></div>
+
+            <!-- Add REPL Terminal -->
+            <div class="repl-container">
+                <h3>Board REPL</h3>
+                <div id="repl-output" class="repl-output"></div>
+                <div class="repl-input-container">
+                    <span class="repl-prompt">>>></span>
+                    <input type="text" id="repl-input" class="repl-input" placeholder="Enter REPL command">
+                </div>
+                <div class="repl-controls">
+                    <button onclick="clearREPL()" class="btn btn-secondary">Clear</button>
+                    <button onclick="interruptREPL()" class="btn btn-warning">Interrupt (Ctrl+C)</button>
+                    <button onclick="softResetREPL()" class="btn btn-danger">Soft Reset</button>
+                </div>
             </div>
         </div>
 

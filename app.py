@@ -7,16 +7,25 @@ import ftplib
 import socket
 import threading
 import time
-from werkzeug.utils import secure_filename
 import zipfile
 import tempfile
+from werkzeug.utils import secure_filename
+from flask_sock import Sock
 
-app = Flask(__name__)
+
+app = Flask(__name__, 
+    static_url_path='/static',
+    static_folder='static',
+    template_folder='templates')
+
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 3 * 1024 * 1024  # 3 MB max file size
 
 # Ensure upload directory exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Initialize Flask-Sock
+sock = Sock(app)
 
 class BoardManager:
     def __init__(self):
@@ -282,6 +291,75 @@ def download_via_serial(filenames, connection_data):
         return {'success': True, 'zip_path': zip_path}
     except Exception as e:
         return {'success': False, 'message': f'Serial download failed: {str(e)}'}
+
+
+# REPL WebSocket handler
+@sock.route('/repl')
+def repl_socket(ws):
+    connection_data = json.loads(ws.receive())
+    
+    try:
+        if connection_data['type'] == 'wifi':
+            handle_wifi_repl(ws, connection_data['config'])
+        else:
+            handle_serial_repl(ws, connection_data['config'])
+    except Exception as e:
+        ws.send(f"Error: {str(e)}\n")
+
+def handle_wifi_repl(ws, config):
+    import telnetlib
+    try:
+        tn = telnetlib.Telnet(config['address'], timeout=2)
+        while True:
+            try:
+                # Read from telnet
+                data = tn.read_eager().decode('utf-8')
+                if data:
+                    ws.send(data)
+                
+                # Check for input from websocket
+                try:
+                    command = ws.receive(timeout=0.1)
+                    if command:
+                        tn.write(command.encode('utf-8') + b'\r\n')
+                except:
+                    pass
+                    
+            except Exception as e:
+                ws.send(f"Error: {str(e)}\n")
+                break
+    finally:
+        try:
+            tn.close()
+        except:
+            pass
+
+def handle_serial_repl(ws, config):
+    try:
+        ser = serial.Serial(config['port'], config['baudrate'], timeout=0.1)
+        while True:
+            try:
+                # Read from serial
+                if ser.in_waiting:
+                    data = ser.read(ser.in_waiting).decode('utf-8')
+                    ws.send(data)
+                
+                # Check for input from websocket
+                try:
+                    command = ws.receive(timeout=0.1)
+                    if command:
+                        ser.write(command.encode('utf-8') + b'\r\n')
+                except:
+                    pass
+                    
+            except Exception as e:
+                ws.send(f"Error: {str(e)}\n")
+                break
+    finally:
+        try:
+            ser.close()
+        except:
+            pass
 
 @app.route('/webstore')
 def webstore():

@@ -7,7 +7,7 @@
     <title>Embedded Board Manager</title>
     <link rel="stylesheet" href="static/style.css">
     <!--Navigation-button to navigate the url:s-->
-        <link rel="icon" type="image/png" href="static/favicon.png">
+        <link rel="icon" type="image/png" href="static/favicon-16x16.png">
         <nav class="main-nav">
             <ul id="nav-menu">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -19,6 +19,13 @@
 </head>
 
 <body>
+    <div class="tabs">
+            <a href="{{ url_for('index') }}" class="tab-button" target="_self">Board Manager</a>
+            <a href="{{ url_for('webstore') }}" class="tab-button" target="_self">Webstore</a>
+            <a href="{{ url_for('about') }}" class="tab-button" target="_self">About</a>
+            <a href="{{ url_for('faq') }}" class="tab-button" target="_self">F.A.Q.</a>
+    </div>
+
     <!--Presentation video embedded from Youtube-->
     <div class="video-container">
         <iframe width="560" height="315" src="https://www.youtube.com/watch?v=QBYr0k8dOtw" title="YouTube video player"

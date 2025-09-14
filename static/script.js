@@ -316,7 +316,6 @@ function initializeMainPage() {
     setupFileUpload();
 }
 
-
 // Connection form toggle
 function toggleConnectionForm() {
     const wifiForm = document.getElementById('wifi-form');
@@ -329,6 +328,130 @@ function toggleConnectionForm() {
     } else {
         wifiForm.style.display = 'none';
         serialForm.style.display = 'block';
+    }
+}
+
+// REPL WebSocket connection
+let replSocket = null;
+
+function initializeREPL() {
+    const connectionType = document.querySelector('input[name="connection-type"]:checked').value;
+    const replOutput = document.getElementById('repl-output');
+    const replInput = document.getElementById('repl-input');
+
+    // Close existing connection if any
+    if (replSocket) {
+        replSocket.close();
+    }
+
+    // Create WebSocket connection
+    replSocket = new WebSocket(`ws://${window.location.host}/repl`);
+
+    replSocket.onopen = () => {
+        appendToREPL('Connected to board REPL\n');
+        
+        // Send connection info
+        const connectionData = {
+            type: connectionType,
+            config: connectionType === 'wifi' ? {
+                address: document.getElementById('wifi-address').value,
+                username: document.getElementById('wifi-username').value,
+                password: document.getElementById('wifi-password').value
+            } : {
+                port: document.getElementById('serial-port').value,
+                baudrate: parseInt(document.getElementById('serial-baudrate').value)
+            }
+        };
+        replSocket.send(JSON.stringify(connectionData));
+    };
+
+    replSocket.onmessage = (event) => {
+        appendToREPL(event.data);
+    };
+
+    replSocket.onclose = () => {
+        appendToREPL('Disconnected from board REPL\n');
+    };
+
+    replSocket.onerror = (error) => {
+        appendToREPL(`Error: ${error.message}\n`);
+    };
+
+    // Handle input
+    replInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            const command = replInput.value;
+            replSocket.send(command);
+            replInput.value = '';
+            appendToREPL(`>>>> ${command}\n`);
+        }
+    });
+}
+
+function appendToREPL(text) {
+    const replOutput = document.getElementById('repl-output');
+    replOutput.textContent += text;
+    replOutput.scrollTop = replOutput.scrollHeight;
+}
+
+function clearREPL() {
+    document.getElementById('repl-output').textContent = '';
+}
+
+function interruptREPL() {
+    if (replSocket && replSocket.readyState === WebSocket.OPEN) {
+        replSocket.send('\x03');  // Send Ctrl+C
+        appendToREPL('\n*** Interrupted ***\n');
+    }
+}
+
+function softResetREPL() {
+    if (replSocket && replSocket.readyState === WebSocket.OPEN) {
+        replSocket.send('\x04');  // Send Ctrl+D
+        appendToREPL('\n*** Soft Reset ***\n');
+    }
+}
+
+// Add REPL initialization to connection test
+async function testConnection() {
+    const connectionType = document.querySelector('input[name="connection-type"]:checked').value;
+    const statusElement = document.getElementById("connection-status");
+
+    let connectionData;
+    if (connectionType === "wifi") {
+        connectionData = {
+            type: "wifi",
+            address: document.getElementById("wifi-address").value,
+            username: document.getElementById("wifi-username").value,
+            password: document.getElementById("wifi-password").value,
+        };
+    } else if (connectionType === "serial") {
+        connectionData = {
+            type: "serial",
+            port: document.getElementById("serial-port").value,
+            baudrate: parseInt(document.getElementById("serial-baudrate").value),
+        };
+    }
+
+    try {
+        const response = await fetch("/api/test-connection", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(connectionData),
+        });
+
+        const result = await response.json();
+        statusElement.textContent = result.message;
+        statusElement.style.color = result.success ? "green" : "red";
+
+        if (result.success) {
+            initializeREPL();  // Initialize REPL when connection is successful
+        }
+    } catch (error) {
+        statusElement.textContent = "Connection test failed: " + error.message;
+        statusElement.style.color = "red";
     }
 }
 

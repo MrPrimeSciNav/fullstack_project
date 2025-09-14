@@ -7,7 +7,7 @@
     <title>Embedded Board Manager</title>
     <link rel="stylesheet" href="static/style.css">
     <!--Navigation-button to navigate the url:s-->
-        <link rel="icon" type="image/png" href="static/favicon.png">
+        <link rel="icon" type="image/png" href="static/favicon-16x16.png">
         <nav class="main-nav">
             <ul id="nav-menu">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -25,6 +25,13 @@
             <p>Learn more about our mission and team</p>
         </header>
 
+        <div class="tabs">
+            <a href="{{ url_for('index') }}" class="tab-button" target="_self">Board Manager</a>
+            <a href="{{ url_for('webstore') }}" class="tab-button" target="_self">Webstore</a>
+            <a href="{{ url_for('about') }}" class="tab-button" target="_self">About</a>
+            <a href="{{ url_for('faq') }}" class="tab-button" target="_self">F.A.Q.</a>
+        </div>
+
         <div class="about-section">
             <h2>Our Mission</h2>
             <p>At PrimeSciNav, our mission is to empower scientists, engineers, and innovators with cutting-edge resources and tools that drive discovery and innovation. We are committed to providing high-quality products and services that meet the evolving needs of our community.</p>
@@ -33,19 +40,19 @@
         <div class="team-section">
             <h2>Meet the Team</h2>
             <div class="team-member">
-                <h3>Dr. Jane Smith</h3>
+                <h3>Dr. David Jekyl</h3>
                 <p>Founder & CEO</p>
-                <p>With over 20 years of experience in scientific research and technology development, Dr. Smith leads PrimeSciNav with a vision for innovation and excellence.</p>
+                <p>With over 20 years of experience in scientific research and technology development, Dr. Jekyl leads PrimeSciNav with a vision for innovation and excellence.</p>
             </div>
             <div class="team-member">
-                <h3>John Doe</h3>
+                <h3>Mr David Hyde</h3>
                 <p>Chief Technology Officer</p>
-                <p>John oversees the development of our products and ensures that we stay at the forefront of technological advancements in the scientific community.</p>
+                <p>Mr Hyde oversees the development of our products and ensures that we stay at the forefront of technological advancements in the scientific community.</p>
             </div>
             <div class="team-member">
-                <h3>Emily Johnson</h3>
+                <h3>Dorian</h3>
                 <p>Head of Customer Success</p>
-                <p>Emily is dedicated to ensuring that our customers have the best experience possible with our products and services.</p>
+                <p>Dorian, our furry friend, is dedicated to ensuring that our customers have the best experience possible with our products and services.</p>
             </div>
         </div>
 

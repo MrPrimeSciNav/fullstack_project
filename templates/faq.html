@@ -4,33 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frequently Asked Questions</title>
+    <title>Embedded Board Manager</title>
     <link rel="stylesheet" href="static/style.css">
+    <!--Navigation-button to navigate the url:s-->
+        <link rel="icon" type="image/png" href="static/favicon-16x16.png">
+        <nav class="main-nav">
+            <ul id="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('webstore') }}">Webstore</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('faq') }}">F.A.Q.</a></li>
+            </ul>
+        </nav>
 </head>
 
 <body>
+    <!-- Navigation menu -->
+    <nav class="main-nav">
+        <ul id="nav-menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('webstore') }}">Webstore</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('faq') }}" class="active">F.A.Q.</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <header>
             <h1>Frequently Asked Questions</h1>
             <p>Your questions answered about the Embedded Board Manager</p>
         </header>
 
+        <div class="tabs">
+            <a href="{{ url_for('index') }}" class="tab-button" target="_self">Board Manager</a>
+            <a href="{{ url_for('webstore') }}" class="tab-button" target="_self">Webstore</a>
+            <a href="{{ url_for('about') }}" class="tab-button" target="_self">About</a>
+            <a href="{{ url_for('faq') }}" class="tab-button" target="_self">F.A.Q.</a>
+        </div>
+
+        <!-- Search functionality -->
+        <div class="search-container">
+            <input type="text" id="faq-search" placeholder="Search FAQ..." 
+                   onkeyup="searchFAQ(this.value)">
+        </div>
+
         <div class="faq-section" id="faq-section">
-            <!-- FAQ items will be dynamically inserted here by JavaScript -->
             <div id="faq-container" class="faq-container">
                 <!-- FAQ items will be loaded here -->
+                <div class="loading">Loading FAQ...</div>
             </div>
         </div>
     </div>
 
     <div class="questions">
         <h2>Have more questions?</h2>
-        <p>If you have any other questions or need further assistance, feel free to reach out to us at <a
-                href="mailto:bigboss@primescinav.com" target="_blank">
-                bigboss@primescinav.com</a>.</p>
+        <p>If you have any other questions or need further assistance, feel free to reach out to us at 
+           <a href="mailto:bigboss@primescinav.com" target="_blank">bigboss@primescinav.com</a>.</p>
     </div>
 
-    <script src="static/script.js"></script>
+    <!-- url_for for script source -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Ensure FAQ loads when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFAQData();
+        });
+    </script>
 </body>
-
 </html>
